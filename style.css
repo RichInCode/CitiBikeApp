@@ -1,0 +1,20 @@
+body {
+    background-image: url("rim-clipart-wheel-hi.png");
+    background-repeat: no-repeat;
+    background-position: 450px 60px;
+    background-color: light-blue;
+    width: 1000px;
+    height: 550px;
+    padding: 50px;
+    padding-top: 5px;
+    border: 10px solid red;
+    outline-color: red;
+    position: relative;
+}
+
+h1 {
+    color: white;
+    font-size: 40px;
+    background-color: blue;
+    
+}

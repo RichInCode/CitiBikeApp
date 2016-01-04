@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Predict the number of riders</title>
+		<link rel="stylesheet" type=text/css href='{{ url_for('static',filename='style.css') }}'>
+	</head>
+	<body>
+		<div class=page>
+  		  <h1>Predict the number of riders</h1>
+		 
+		  <div class=metanav>
+		    <h2>Using a random forest regressor and some user input features, we can predict the number of riders in a given day in some neighborhood</h2>
+		  </div>
+		</div>
+		<div style="margin-left:640px; margin-top:2px; position:absolute"> Neighborhood divisions </div>
+		<img src="static/neighborhoods.jpg" style="margin-left:425px; margin-top:20px; position:absolute" width="50%"/><br></br>
+		<form action="predictionForm.html" method="post">
+		  <h2>Neighborhood</h2>
+		  <select name="neighborhood">
+		    <option value="0">Upper West Side</option>
+		    <option value="1">Upper East Side</option>
+		    <option value="2">Midtown</option>
+		    <option value="3">Lower Side</option>
+		    <option value="4">Governers Island</option>
+		    <option value="5">Other</option>
+		  </select>
+		  <h2>Day of the Week</h2>
+		  <select name="dayofweek">
+		    <option value="0">Monday</option>
+		    <option value="1">Tuesday</option>
+		    <option value="2">Wednesday</option>
+		    <option value="3">Thursday</option>
+		    <option value="4">Friday</option>
+		    <option value="5">Saturday</option>
+		    <option value="6">Sunday</option>
+		  </select>
+		  <h2>Temperature (Celcius)</h2>
+		  <input type="text" name="temperature" value="20."><br>
+		  <h2>Rain (mm)</h2>
+		  <input type="text" name="rain" value="0"><br>
+		  <h2>Snow (mm)</h2>
+		  <input type="text" name="snow" value="0"><br><br>
+
+		  <input type="submit" value="Submit">
+		</form>
+	</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CitiBike Helper</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css')}}">
+	</head>
+	<body>
+		<div class=page>
+  		  <h1>Citi Bike Sharing Helper App</h1>
+		 
+		  <div class=metanav>
+		    <h2>What information are you interested in?</h2>
+		    <form id='userinfoform' action='placesGone.html' method='post'>
+		      <p>
+			<input type='submit' name='stationUse' value='Use of stations' style="margin-left:625px; margin-top:5px; position:absolute" />
+		      </p>
+		    </form>
+		    <form id='userinfoform' action='topPlaces.html' method='post'>
+		      <p>
+			<input type='submit' name='topTen' value='Top 10 routes' style="margin-left:450px; margin-top:160px; position:absolute" />
+		      </p>
+		    </form>
+		    <form id='userinfoform' action='travelTimes.html' method='post'>
+		      <p>
+			<input type='submit' value='When do people ride?' style="margin-left:800px; margin-top:160px; position:absolute" />
+		      </p>
+		    </form>
+		    <form id='userinfoform' action='deomographics' method='post'>
+		      <p>
+			<input type='submit' value='Basic deomographics'  style="margin-left:625px; margin-top:330px; position:absolute" />
+		      </p>
+		    </form>
+		    <form id='userinfoform' action='predictionForm.html' method='get'>
+		      <p>
+			<input type='submit' value='Predict number of riders'  style="margin-left:625px; margin-top:160px; position:absolute" />
+		      </p>
+		    </form>
+                  </div>
+		</div>
+	</body>
+</html>
