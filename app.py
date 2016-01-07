@@ -5,7 +5,7 @@ from bokeh.plotting import figure, output_file, save
 from bokeh._legacy_charts import TimeSeries
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-import cPickle as pickle
+import dill as pickle
 
 #some helper functions
 
