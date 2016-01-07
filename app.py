@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import requests
 import pandas
-from bokeh.plotting import figure, output_file, save
-from bokeh._legacy_charts import TimeSeries
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import dill as pickle
