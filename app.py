@@ -15,6 +15,14 @@ app = Flask(__name__)
 #app.vars['5'] = 'volume'
 #app.vars['11'] = 'adjusted closing price'
 
+#get the features desired for the prediction from the form
+#load pickle data
+# this includes the DictVectorizer mapping
+# and the model
+with open('./model_pickled.pkl','rb') as fp:
+  vectorizer = dill.load(fp)
+  rf = dill.load(fp)
+
 @app.route('/')
 def main():
   return redirect('/index')
@@ -44,14 +52,6 @@ def predictionForm():
   if request.method == 'GET':  
     return render_template('predictionForm.html')
   else:
-  #get the features desired for the prediction from the form
-  #load pickle data
-  # this includes the DictVectorizer mapping
-  # and the model
-    with open('./model_pickled.pkl','rb') as fp:
-      vectorizer = dill.load(fp)
-      rf = dill.load(fp)
-
     #transform data via the dictvectorizer
     X = {'neighborhood': str(request.form['neighborhood']), 'avg_temp': float(request.form['temperature']), 'weekday': str(request.form['dayofweek']), 'PRCP': int(request.form['rain']), 'SNOW': int(request.form['snow'])}
     X = vectorizer.transform(X)
@@ -62,7 +62,7 @@ def predictionForm():
     #create the template webpage on the fly
     outpage = 'templates/prediction.html'
     with open(outpage,'wb') as fp:
-      theline = '<!doctype html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <title>CitiBike Helper</title> <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ url_for(\'static\', filename=\'styles/style.css\')}}\"> </head> <body> <font size="+4">'+str(round(prediction))+'</font> <form id=\'userinfoform\' action=\'modelDetails.html\' method=\'get\'> <p> <input type=\'submit\' name=\'modelDetails\' value=\'Model Details\' /> </p> </form> </body> </html>'
+      theline = '<!doctype html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <title>CitiBike Helper</title> <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ url_for(\'static\', filename=\'styles/style.css\')}}\"> </head> <body> <font size="+4">'+str(int(round(prediction)))+'</font> <form id=\'userinfoform\' action=\'modelDetails.html\' method=\'get\'> <p> <input type=\'submit\' name=\'modelDetails\' value=\'Model Details\' /> </p> </form> </body> </html>'
       fp.write(theline)
       
     return render_template('prediction.html')
