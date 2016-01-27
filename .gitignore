@@ -1,0 +1,10 @@
+*.csv
+*~
+*.osm
+*.dbf
+*.prj
+*.shp
+*.shp.xml
+*.shx
+*.txt
+*.xml

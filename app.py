@@ -3,7 +3,7 @@ import requests
 import pandas
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-import dill as pickle
+import dill
 
 #some helper functions
 
@@ -35,6 +35,10 @@ def topPlaces():
 def travelTimes():
   return render_template('travelTimes.html')
 
+@app.route('/travelTimes_extended.html', methods=['GET','POST'])
+def travelTimes_extended():
+  return render_template('travelTimes_extended.html')
+
 @app.route('/predictionForm.html', methods=['GET','POST'])
 def predictionForm():
   if request.method == 'GET':  
@@ -45,8 +49,8 @@ def predictionForm():
   # this includes the DictVectorizer mapping
   # and the model
     with open('./model_pickled.pkl','rb') as fp:
-      vectorizer = pickle.load(fp)
-      rf = pickle.load(fp)
+      vectorizer = dill.load(fp)
+      rf = dill.load(fp)
 
     #transform data via the dictvectorizer
     X = {'neighborhood': str(request.form['neighborhood']), 'avg_temp': float(request.form['temperature']), 'weekday': str(request.form['dayofweek']), 'PRCP': int(request.form['rain']), 'SNOW': int(request.form['snow'])}
@@ -58,11 +62,14 @@ def predictionForm():
     #create the template webpage on the fly
     outpage = 'templates/prediction.html'
     with open(outpage,'wb') as fp:
-      theline = '<!doctype html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <title>CitiBike Helper</title> <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ url_for(\'static\', filename=\'styles/style.css\')}}\"> </head> <body>'+str(round(prediction))+'</body> </html>'
+      theline = '<!doctype html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <title>CitiBike Helper</title> <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ url_for(\'static\', filename=\'styles/style.css\')}}\"> </head> <body> <font size="+4">'+str(round(prediction))+'</font> <form id=\'userinfoform\' action=\'modelDetails.html\' method=\'get\'> <p> <input type=\'submit\' name=\'modelDetails\' value=\'Model Details\' /> </p> </form> </body> </html>'
       fp.write(theline)
       
     return render_template('prediction.html')
       
+@app.route('/modelDetails.html', methods=['GET','PSOT'])
+def modelDetails():
+  return render_template('modelDetails.html')
 
 if __name__ == '__main__':
   app.run(port=33507)

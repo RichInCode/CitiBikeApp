@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Model Information</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+	</head>
+	<body>
+		<div class=page>
+  		  <h1>Here are some details about the model used for predictions</h1>
+		 
+		  <div class=metanav>
+		    <h2>The trained model is a Random Forest Regressor Model.</h2>
+		    <h2>The Random Forest is trained with 20 estimators.</h2>
+		    <h2>This has been evaluated by doing a grid search.</h2>
+		    <h2>The importance of each feature has been evaluated and deplayed in the graph below.</h2>
+		    <img src="static/feature_importance.png"/><br></br>
+		    <h2>The main drivers in the number of rides seems to be neighborhood followed by temperature followed by weekend travel.</h2>
+		    <h2>The model has been trained and through cross-validation is found to have a score of 0.94.</h2>
+		  </div>
+		</div>
+	</body>
+</html>
+
