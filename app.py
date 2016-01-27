@@ -4,6 +4,7 @@ import pandas
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import dill
+from sklearn.ensemble import RandomForestRegressor
 
 #some helper functions
 
