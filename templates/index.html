@@ -3,40 +3,54 @@
 	<head>
 		<meta charset="utf-8">
 		<title>CitiBike Helper</title>
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/default.css')}}">
 	</head>
 	<body>
-		<div class=page>
-  		  <h1>Citi Bike Sharing Helper App</h1>
-		 
-		  <div class=metanav>
-		    <h2>What information are you interested in?</h2>
-		    <form id='userinfoform' action='placesGone.html' method='post'>
-		      <p>
-			<input type='submit' name='stationUse' value='Use of stations' style="margin-left:625px; margin-top:5px; position:absolute" />
-		      </p>
-		    </form>
-		    <form id='userinfoform' action='topPlaces.html' method='post'>
-		      <p>
-			<input type='submit' name='topTen' value='Top 10 routes' style="margin-left:450px; margin-top:160px; position:absolute" />
-		      </p>
-		    </form>
-		    <form id='userinfoform' action='travelTimes.html' method='post'>
-		      <p>
-			<input type='submit' value='When do people ride?' style="margin-left:800px; margin-top:160px; position:absolute" />
-		      </p>
-		    </form>
-		    <form id='userinfoform' action='deomographics' method='post'>
-		      <p>
-			<input type='submit' value='Basic deomographics'  style="margin-left:625px; margin-top:330px; position:absolute" />
-		      </p>
-		    </form>
-		    <form id='userinfoform' action='predictionForm.html' method='get'>
-		      <p>
-			<input type='submit' value='Predict number of riders'  style="margin-left:625px; margin-top:160px; position:absolute" />
-		      </p>
-		    </form>
-                  </div>
+		<div id="header-wrapper">
+		  <div id="header" class="container">
+		  </div>
+		  photo credit: <a href="http://www.flickr.com/photos/36604011@N08/9410440991">Citi bike</a> via <a href="http://photopin.com">photopin</a> <a href="https://creativecommons.org/licenses/by-nd/2.0/">(license)</a>
 		</div>
+		<div id="wrapper">
+		  <div id="page" class="conainter">
+		    <div id="content">
+		      <div class="title">
+			<h2>Citi Bike Sharing Helper App</h2>
+			<span class="byline">What information are you interested in?</span>
+		      </div>
+		      <p>
+			<img src="static/styles/images/citiimage-small.jpg" alt class="image image-full">
+			photo credit: <a href="http://www.flickr.com/photos/56300399@N06/8413263630">Bike Lane</a> via <a href="http://photopin.com">photopin</a> <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/">(license)</a>
+		      </p>
+		    </div>
+		    <div id="sidebar">
+		      <h2>Click on a button below to explore the data:</h2>
+		      <form id='userinfoform' action='placesGone.html' method='post'>
+			<p>
+			  <input type='submit' class="button" name='stationUse' value='Use of stations'/>
+			</p>
+		      </form>
+		      <form id='userinfoform' action='topPlaces.html' method='post'>
+			<p>
+			  <input type='submit' class="button" name='topTen' value='Top 10 routes'  />
+			</p>
+		      </form>
+		      <form id='userinfoform' action='travelTimes.html' method='post'>
+			<p>
+			  <input type='submit' class="button" value='When do people ride?'  />
+			</p>
+		      </form>
+		      <form id='userinfoform'  action='deomographics' method='post'>
+			<p>
+			  <input type='submit' class="button" value='Basic deomographics' />
+			</p>
+		      </form>
+		      <form id='userinfoform' action='predictionForm.html' method='get'>
+			<p>
+			  <input type='submit' class="button" value='Predict number of riders' />
+			</p>
+		      </form>
+		    </div>
+		  </div>
 	</body>
 </html>

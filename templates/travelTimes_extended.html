@@ -3,17 +3,23 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Travel Times</title>
-		<link rel="stylesheet" type=text/css href='{{ url_for('static',filename='style.css') }}'>
+		<link rel="stylesheet" type=text/css href="{{ url_for('static',filename='styles/default.css') }}">
 	</head>
 	<body>
-		<div class=page>
-  		  <h1>Travel Times</h1>
-		 
-		  <div class=metanav>
-		    <h2>Plots showing the number of rides per day as a function of the trip start hour for each month.</h2>
-		    <h2>Weekday and weekend data is displayed separately.</h2>
-		  </div>
+	  <div id="header-wrapper">
+	    <div id="header" class="container">
+	    </div>
+	    photo credit: <a href="http://www.flickr.com/photos/36604011@N08/9410440991">Citi bike</a> via <a href="http://photopin.com">photopin</a> <a href="https://creativecommons.org/licenses/by-nd/2.0/">(license)</a>
+	  </div>
+	  <div id="wrapper">
+	    <div id="page" class="conainter">
+	      <div id="content">
+		<div class="title">
+		  <h2>Travel Times</h2>
+		  <span class="byline">Plots showing the number of rides per day as a function of the trip start hour for each month.  Weekday and weekend data is displayed separately.</span>
 		</div>
+	      </div>
+	    </div>
 		<br>July 2013</br>
 		<img src="static/travelMaps/2013-07 - Citi Bike trip data.csvhourlyCounts.jpg"/><br></br>
 		<br>August 2013</br>

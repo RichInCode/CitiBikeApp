@@ -54,7 +54,7 @@ def predictionForm():
     return render_template('predictionForm.html')
   else:
     #transform data via the dictvectorizer
-    X = {'neighborhood': str(request.form['neighborhood']), 'avg_temp': float(request.form['temperature']), 'weekday': str(request.form['dayofweek']), 'PRCP': int(request.form['rain']), 'SNOW': int(request.form['snow'])}
+    X = {'neighborhood': str(request.form['neighborhood']), 'avg_temp': float(request.form['temperature']), 'weekday': str(request.form['dayofweek']), 'PRCP': float(request.form['rain']), 'SNOW': float(request.form['snow'])}
     X = vectorizer.transform(X)
 
     #then make some predictions based on the input values
@@ -63,7 +63,7 @@ def predictionForm():
     #create the template webpage on the fly
     outpage = 'templates/prediction.html'
     with open(outpage,'wb') as fp:
-      theline = '<!doctype html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <title>CitiBike Helper</title> <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ url_for(\'static\', filename=\'styles/style.css\')}}\"> </head> <body> <font size="+4">'+str(int(round(prediction)))+'</font> <form id=\'userinfoform\' action=\'modelDetails.html\' method=\'get\'> <p> <input type=\'submit\' name=\'modelDetails\' value=\'Model Details\' /> </p> </form> </body> </html>'
+      theline = '<!doctype html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> <title>CitiBike Helper</title> <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ url_for(\'static\', filename=\'styles/default.css\')}}\"> </head> <body> <div id="header-wrapper"> <div id="header" class="container"> </div>  photo credit: <a href="http://www.flickr.com/photos/36604011@N08/9410440991">Citi bike</a> via <a href="http://photopin.com">photopin</a> <a href="https://creativecommons.org/licenses/by-nd/2.0/">(license)</a> </div>	<div id="wrapper"> <div id="page" class="conainter"> <div id="content"> <div class="title"> <h2>Prediction for the number of riders</h2> <span class="byline">in a day with the specified parameters</span> </div> <font size="+4">'+str(int(round(prediction)))+'</font> <form id=\'userinfoform\' action=\'modelDetails.html\' method=\'get\'> <p> <input class=\"button\" type=\'submit\' name=\'modelDetails\' value=\'Model Details\' /> </p> </form> </body> </html>'
       fp.write(theline)
       
     return render_template('prediction.html')

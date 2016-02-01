@@ -3,18 +3,27 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Predict the number of riders</title>
-		<link rel="stylesheet" type=text/css href='{{ url_for('static',filename='style.css') }}'>
+		<link rel="stylesheet" type=text/css href="{{ url_for('static',filename='styles/default.css') }}">
 	</head>
 	<body>
-		<div class=page>
-  		  <h1>Predict the number of riders</h1>
-		 
-		  <div class=metanav>
-		    <h2>Using a random forest regressor and some user input features, we can predict the number of riders in a given day in some neighborhood</h2>
-		  </div>
+	  <div id="header-wrapper">
+	    <div id="header" class="container">
+	    </div>
+	    photo credit: <a href="http://www.flickr.com/photos/36604011@N08/9410440991">Citi bike</a> via <a href="http://photopin.com">photopin</a> <a href="https://creativecommons.org/licenses/by-nd/2.0/">(license)</a>
+	  </div>
+	  <div id="wrapper">
+	    <div id="page" class="conainter">
+	      <div id="content">
+		<div class="title">
+		  <h2>Predict the number of riders</h2>
+		  <span class="byline">Using a random forest regressor and some user input features, we can predict the number of riders in a given day in some neighborhood</span>
 		</div>
-		<div style="margin-left:640px; margin-top:2px; position:absolute"> Neighborhood divisions </div>
-		<img src="static/neighborhoods.jpg" style="margin-left:425px; margin-top:20px; position:absolute" width="50%"/><br></br>
+		<p>
+		  <h2> Neighborhood divisions </h2>
+		  <img src="static/neighborhoods.jpg" width="100%"/>
+		</p>
+	      </div>
+	      <div id="sidebar">
 		<form action="predictionForm.html" method="post">
 		  <h2>Neighborhood</h2>
 		  <select name="neighborhood">
@@ -25,6 +34,7 @@
 		    <option value="4">Governers Island</option>
 		    <option value="5">Other</option>
 		  </select>
+		  <br></br>
 		  <h2>Day of the Week</h2>
 		  <select name="dayofweek">
 		    <option value="0">Monday</option>
@@ -35,19 +45,25 @@
 		    <option value="5">Saturday</option>
 		    <option value="6">Sunday</option>
 		  </select>
+		  <br></br>
 		  <h2>Temperature (Celcius)</h2>
 		  <input type="text" name="temperature" value="20."><br>
+		  <br></br>
 		  <h2>Rain (mm)</h2>
-		  <input type="text" name="rain" value="0"><br>
+		  <input type="text" name="rain" value="0">
+		  <br></br>
 		  <h2>Snow (mm)</h2>
-		  <input type="text" name="snow" value="0"><br><br>
-
-		  <input type="submit" value="Submit">
+		  <input type="text" name="snow" value="0">
+		  <br></br>
+		  <input type="submit" class="button" value="Submit">
 		</form>
 		<form id='userinfoform' action='modelDetails.html' method='get'> 
 		  <p> 
-		    <input type='submit' name='modelDetails' value='Model Details' /> 
+		    <input type='submit' class="button" name='modelDetails' value='Model Details' /> 
 		  </p>
 		</form>
+	      </div>
+	    </div>
+	  </div>
 	</body>
 </html>
