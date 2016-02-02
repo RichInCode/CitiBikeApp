@@ -3,22 +3,35 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Model Information</title>
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/default.css') }}">
 	</head>
 	<body>
-		<div class=page>
-  		  <h1>Here are some details about the model used for predictions</h1>
-		 
-		  <div class=metanav>
-		    <h2>The trained model is a Random Forest Regressor Model.</h2>
-		    <h2>The Random Forest is trained with 20 estimators.</h2>
-		    <h2>This has been evaluated by doing a grid search.</h2>
-		    <h2>The importance of each feature has been evaluated and deplayed in the graph below.</h2>
-		    <img src="static/feature_importance.png"/><br></br>
-		    <h2>The main drivers in the number of rides seems to be neighborhood followed by temperature followed by weekend travel.</h2>
-		    <h2>The model has been trained and through cross-validation is found to have a score of 0.94.</h2>
-		  </div>
+	  <div id="header-wrapper">
+	    <div id="header" class="container">
+	    </div>
+	    photo credit: <a href="http://www.flickr.com/photos/36604011@N08/9410440991">Citi bike</a> via <a href="http://photopin.com">photopin</a> <a href="https://creativecommons.org/licenses/by-nd/2.0/">(license)</a>
+	  </div>
+	  <div id="wrapper">
+	    <div id="page" class="conainter">
+	      <div id="content">
+		<div class="title">
+		  <h2>Here are some details about the model used for predictions:</h2>
+		  <span class="byline">The trained model is a Random Forest Regressor Model.  The Random Forest is trained with 20 estimators.  This has been evaluated by doing a grid search.</span>
 		</div>
+		<p>
+		  <img src="static/feature_importance.png" alt class="image image-full">
+		</p>
+	      </div>
+		 
+	      <div id="sidebar">
+		<p>
+		  <h3>The importance of each feature has been evaluated and deplayed in the graph at left.</h3>
+		  <h3>The main drivers in the number of rides seems to be neighborhood followed by temperature followed by weekend travel.</h3>
+		  <h3>The model has been trained and through cross-validation is found to have a score of 0.94.</h3>
+		</p>
+	      </div>
+	    </div>
+	  </div>
 	</body>
 </html>
 

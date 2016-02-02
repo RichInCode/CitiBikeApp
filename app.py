@@ -32,9 +32,17 @@ def main():
 def index():
     return render_template('index.html')
 
+@app.route('/basicDemographics.html',methods=['GET','POST'])
+def basicDemographics():
+  return render_template('basicDemographics.html')
+
 @app.route('/placesGone.html', methods=['GET','POST'])
 def placesGone():
   return render_template('placesGone.html')
+
+@app.route('/placesGone_extended.html', methods=['GET','POST'])
+def placesGone_extended():
+  return render_template('placesGone_extended.html')
 
 @app.route('/topPlaces.html', methods=['GET','POST'])
 def topPlaces():
