@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Trip Durations</title>
+		<link rel="stylesheet" type=text/css href="{{ url_for('static',filename='styles/default.css') }}">
+	</head>
+	<body>
+	  <div id="header-wrapper">
+	    <div id="header" class="container">
+	    </div>
+	    photo credit: <a href="http://www.flickr.com/photos/36604011@N08/9410440991">Citi bike</a> via <a href="http://photopin.com">photopin</a> <a href="https://creativecommons.org/licenses/by-nd/2.0/">(license)</a>
+	  </div>
+	  <div id="wrapper">
+	    <div id="page" class="conainter">
+	      <div id="content">
+		<div class="title">
+		  <h2>Trip Durations</h2>
+		  <span class="byline">A look at the trip duration time distribution (in minutes) for each month.</span>
+		</div>
+	      </div>
+	    </div>
+	    <p>
+	      <h2>Trip duration distributions with the counts normalized by the total number of trips</h2>
+	      <img src="static/travelMaps/my_gif_tripDuration.GIF"/><br></br>
+	    </p>
+	    <p>
+	      <h2>Trip duration distributions with the counts normalized by the total number of trips grouped by each neighborhood.</h2>
+	      <img src="static/travelMaps/my_gif_tripDurationByNeighborhood.GIF"/><br></br>
+	    </p>
+	    <p>
+	      <h2>And on a log scale...</h2>
+	      <img src="static/travelMaps/my_gif_tripDurationByNeighborhoodLog.GIF"/><br></br>
+	    </p>
+	</body>
+</html>

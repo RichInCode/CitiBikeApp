@@ -48,6 +48,10 @@ def placesGone_extended():
 def topPlaces():
   return render_template('topPlaces.html')
 
+@app.route('/topPlaces_extended.html', methods=['GET','POST'])
+def topPlaces_extended():
+  return render_template('topPlaces_extended.html')
+
 @app.route('/travelTimes.html', methods=['GET','POST'])
 def travelTimes():
   return render_template('travelTimes.html')
@@ -55,6 +59,10 @@ def travelTimes():
 @app.route('/travelTimes_extended.html', methods=['GET','POST'])
 def travelTimes_extended():
   return render_template('travelTimes_extended.html')
+
+@app.route('/tripDurations.html', methods=['GET','POST'])
+def tripDurations():
+  return render_template('tripDurations.html')
 
 @app.route('/predictionForm.html', methods=['GET','POST'])
 def predictionForm():

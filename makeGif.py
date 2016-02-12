@@ -3,7 +3,7 @@ from PIL import Image
 import os
 import glob
 
-file_names = glob.glob("./static/travelMaps/*Age.jpg")
+file_names = glob.glob("./static/travelMaps/*hoodLog.jpg")
 #['animation_a.png', 'animation_b.png', ...] "
 print file_names
 
@@ -23,5 +23,5 @@ print writeGif.__doc__
 #    ...
 #    ...
 
-filename = "my_gif_ageDist.GIF"
+filename = "./static/travelMaps/my_gif_tripDurationByNeighborhoodLog.GIF"
 writeGif(filename, images, duration=1.)
