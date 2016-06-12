@@ -181,4 +181,4 @@ def modelDetails():
   return render_template('modelDetails.html')
 
 if __name__ == '__main__':
-  app.run(port=33507,debug=True)
+  app.run(port=33507)
