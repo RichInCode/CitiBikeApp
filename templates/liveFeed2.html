@@ -1,0 +1,37 @@
+{% block content %}
+<head>
+  <meta charset="utf-8">
+  <title>CitiBike Helper</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/default.css')}}">
+</head>
+<body>
+  <div id="header-wrapper">
+    <div id="header" class="container">
+    </div>
+    photo credit: <a href="http://www.flickr.com/photos/36604011@N08/9410440991">Citi bike</a> via <a href="http://photopin.com">photopin</a> <a href="https://creativecommons.org/licenses/by-nd/2.0/">(license)</a>
+  </div>
+  <div id="wrapper">
+    <div id="page" class="conainter">
+      <div id="content">
+	<div class="title">
+	  <h2>Citi Bike Sharing Helper App*</h2>
+	  <span class="byline">What information are you interested in?</span>
+	</div>
+	<h2>View open spots to park bikes and the number of free bikes nearby</h2>
+	    <h3><table><form action="" method="POST"></h3>
+		  <td>
+		    <label>Select Station:</label>
+		    <select name="option" width="300px">
+		      {% for key in stationsDict %}
+		      <option value="{{ key }}" SELECTED>{{stationsDict[key] }}</option>
+		      {% endfor %}
+		    </select>
+		  </td>
+		  <td>
+		    <input class="button1" type="submit" value="Select">
+		  </td>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
+

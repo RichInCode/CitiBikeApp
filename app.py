@@ -5,16 +5,31 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import dill
 from sklearn.ensemble import RandomForestRegressor
+import urllib2
+import json
+import collections
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.dates import YearLocator, MonthLocator, DateFormatter, date2num
+#from bokeh.plotting import figure
+#from bokeh.resources import CDN
+#from bokeh.embed import file_html, components
 
 #some helper functions
 
+def deg2rad(deg):
+  return deg*(3.14/180.)
+
+def calculateMiles(lat1, lon1, lat2, lon2):
+  dlon = deg2rad(lon2 - lon1)
+  dlat = deg2rad(lat2 - lat1)
+  a = (np.sin(dlat/2.))**2 + np.cos(lat1)*np.cos(lat2)*(np.sin(dlon/2.))**2
+  c = 2.*np.arctan2(np.sqrt(a), np.sqrt(1-a))
+  d = 3961.*c
+  return d
 
 # now the flask app
 app = Flask(__name__)
-#app.vars = {}
-#app.vars['4'] = 'closing price'
-#app.vars['5'] = 'volume'
-#app.vars['11'] = 'adjusted closing price'
 
 #get the features desired for the prediction from the form
 #load pickle data
@@ -30,11 +45,88 @@ def main():
 
 @app.route('/index', methods=['GET','POST'])
 def index():
-    return render_template('index.html')
+  return render_template('index.html')
+
+@app.route('/liveFeed2.html',methods=['GET','POST'])
+def liveFeed2():
+  if request.method == 'GET':
+    stationsDict = {}
+    htmlinformation = urllib2.urlopen("https://gbfs.citibikenyc.com/gbfs/en/station_information.json")
+    data = json.load(htmlinformation)
+    data = stations = data['data']
+    stations = data['stations']
+    for station in stations:
+      #stationsDict[station['station_id']] = (station['name'], station['lat'], station['lon'])
+      stationsDict[station['station_id']] = station['name']
+      #stationsList.append(station['name'])
+      #stationsList = sorted(stationsList)
+
+    ## sort the dictionary
+    stationsDict = collections.OrderedDict(sorted(stationsDict.iteritems(), key=lambda x: x[1]))
+
+    return render_template('liveFeed2.html', stationsDict = stationsDict)
+  else:
+
+    selected_station_id = request.form['option']
+
+    stationDict = {} ## encoding between station id and name
+    freeSpotsDict = {}    ## number of free spots
+    freeBikesDict = {}   ## number of available spots
+    distanceDict = {}
+
+    htmlstatus = urllib2.urlopen("https://gbfs.citibikenyc.com/gbfs/en/station_status.json")
+    htmlinformation = urllib2.urlopen("https://gbfs.citibikenyc.com/gbfs/en/station_information.json")
+    data = json.load(htmlinformation)
+    last_updated = datetime.fromtimestamp(int(data['last_updated']))
+    ## make a dictionary translating station id to street name
+    data = data['data']
+    stations = data['stations']
+    for station in stations:
+      stationDict[station['station_id']] = (station['name'], station['lat'], station['lon'])
+
+    data = json.load(htmlstatus)
+    data = data['data']
+    stations = data['stations']
+    selected_lat = stationDict[selected_station_id][1]
+    selected_lon = stationDict[selected_station_id][2]
+    selected_station = stationDict[selected_station_id][0]
+    for station in stations:
+      d = calculateMiles(selected_lat, selected_lon, stationDict[station['station_id']][1], stationDict[station['station_id']][2])
+      if d > 0.5:
+        continue
+      distanceDict[stationDict[station['station_id']]] = round(d,2)
+      freeSpotsDict[stationDict[station['station_id']]] = station['num_docks_available']
+      freeBikesDict[stationDict[station['station_id']]] = station['num_bikes_available']
+
+    ## sort and list top ten
+    #freeSpotsDict = collections.OrderedDict(sorted(freeSpotsDict.items(), key=lambda x: x[1],reverse=False))
+    #freeBikesDict = collections.OrderedDict(sorted(freeBikesDict.items(), key=lambda x: x[1],reverse=False))
+
+    fig = plt.subplots()
+    templist = []
+    for key in freeSpotsDict:
+      #templist.append(freeSpotsDict[key])
+      #ax.scatter([last_updated],[freeSpotsDict[key]])
+      print last_updated
+      print freeSpotsDict[key]
+      plt.plot([last_updated], [freeSpotsDict[key]],'o')
+    #p.xaxis.axis_label = "time"
+    #p.yaxis.axis_label = "number of free spots"
+    #figJS,figDiv = components(p,CDN)
+    plt.legend(freeSpotsDict.keys())
+    #ax.fmt_xdata = DateFormatter('%Y-%m-%d %H:%M:%S')
+    #fig.autofmt_xdate()
+    plt.savefig("./static/test_plot.jpg")
+    return render_template('test2.html',distanceDict=distanceDict,freeSpotsDict=freeSpotsDict,freeBikesDict=freeBikesDict, selected_station=selected_station)
+    
 
 @app.route('/basicDemographics.html',methods=['GET','POST'])
 def basicDemographics():
   return render_template('basicDemographics.html')
+
+@app.route('/test.html',methods=['GET','POST'])
+def test():
+  return render_template('test.html')
 
 @app.route('/placesGone.html', methods=['GET','POST'])
 def placesGone():
@@ -89,4 +181,4 @@ def modelDetails():
   return render_template('modelDetails.html')
 
 if __name__ == '__main__':
-  app.run(port=33507)
+  app.run(port=33507,debug=True)

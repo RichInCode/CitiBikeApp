@@ -1,0 +1,72 @@
+{% block content %}
+<head>
+  <meta charset="utf-8">
+  <title>CitiBike Helper</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/default.css')}}">
+  <style>
+    table {
+    width:100%;
+    }
+    table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    }
+    th, td {
+    padding: 5px;
+    text-align: left;
+    }
+    table#t01 tr:nth-child(even) {
+    background-color: #eee;
+    }
+    table#t01 tr:nth-child(odd) {
+    background-color:#fff;
+    }
+    table#t01 th {
+    background-color: black;
+    color: white;
+    }
+  </style>
+</head>
+<body>
+  <div id="header-wrapper">
+    <div id="header" class="container">
+    </div>
+    photo credit: <a href="http://www.flickr.com/photos/36604011@N08/9410440991">Citi bike</a> via <a href="http://photopin.com">photopin</a> <a href="https://creativecommons.org/licenses/by-nd/2.0/">(license)</a>
+  </div>
+	<div class='bokeh'>
+	  {{ figDiv|safe }}
+	</div>
+  <div id="wrapper">
+    <div id="page" class="conainter">
+      <div id="content">
+	<div class="title">
+	  <h2>Citi Bike Sharing Helper App*</h2>
+	  <span class="byline">What information are you interested in?</span>
+	</div>
+
+	<div>
+	<h2>Available bikes/spots at stations within half a miles from {{selected_station}}</h2>
+	</div>
+	<table id="t01">
+	<tr>
+	  <th>Station</th>
+	  <th>Total Free Bikes</th>
+	  <th>Total Free Spots</th>
+	  <th>Miles from Selected Station</td>
+	</tr>
+	{% for key in freeSpotsDict %}
+	<tr>
+	  <td>{{ key[0] }}</td>
+	  <td style="text-align:center">{{ freeBikesDict[key]  }}</td>
+	  <td style="text-align:center">{{ freeSpotsDict[key]  }}</td>
+	  <td style="text-align:center">{{ distanceDict[key]}}</td>
+	</tr>
+	{% endfor %}
+	</table>
+      </div>
+    </div>
+
+<!__ <img src="{{ url_for('static', filename='test_plot.jpg')}}"> __>
+
+  </div>
+  {% endblock content %}
