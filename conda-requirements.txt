@@ -5,3 +5,4 @@ pandas
 bokeh
 dill
 scikit-learn
+matplotlib
