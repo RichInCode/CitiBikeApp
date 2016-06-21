@@ -102,21 +102,19 @@ def liveFeed2():
     #freeSpotsDict = collections.OrderedDict(sorted(freeSpotsDict.items(), key=lambda x: x[1],reverse=False))
     #freeBikesDict = collections.OrderedDict(sorted(freeBikesDict.items(), key=lambda x: x[1],reverse=False))
 
-    fig = plt.subplots()
-    templist = []
-    for key in freeSpotsDict:
+    #fig = plt.subplots()
+    #templist = []
+    #for key in freeSpotsDict:
       #templist.append(freeSpotsDict[key])
       #ax.scatter([last_updated],[freeSpotsDict[key]])
-      print last_updated
-      print freeSpotsDict[key]
-      plt.plot([last_updated], [freeSpotsDict[key]],'o')
+      #plt.plot([last_updated], [freeSpotsDict[key]],'o')
     #p.xaxis.axis_label = "time"
     #p.yaxis.axis_label = "number of free spots"
     #figJS,figDiv = components(p,CDN)
-    plt.legend(freeSpotsDict.keys())
+    #plt.legend(freeSpotsDict.keys())
     #ax.fmt_xdata = DateFormatter('%Y-%m-%d %H:%M:%S')
     #fig.autofmt_xdate()
-    plt.savefig("./static/test_plot.jpg")
+    #plt.savefig("./static/test_plot.jpg")
     return render_template('test2.html',distanceDict=distanceDict,freeSpotsDict=freeSpotsDict,freeBikesDict=freeBikesDict, selected_station=selected_station)
     
 
